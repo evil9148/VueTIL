@@ -1,15 +1,25 @@
 <template>
   <CompModalVue
+    @closeModal="modal=false"
     :click="click"
     :rooms="rooms"
     :modal="modal"
-    :modalClose="modalClose"
   />
   <div class="menu">
     <a v-for="(nav, idx) in menus" :key="idx">{{ menus[idx] }}</a>
   </div>
-  <CompDiscountVue  />
-  <CompContentVue :rooms="rooms" :modalHandler='modalHandler' />
+  <CompDiscountVue />
+  <CompContentVue
+    @showModal="
+      modal = true;
+      click = $event;
+    "
+    v-for="(roomContainer, idx) in rooms"
+    :key="idx"
+    :roomContainer="roomContainer"
+    :idx="idx"
+    :click="click"
+  />
 </template>
 
 <script>
@@ -29,15 +39,15 @@ export default {
     const price = ref([90, 70, 40]);
     let click = ref(0);
     let modal = ref(false);
-    const modalClose = () => {
-      modal.value = false;
-    };
+
+ 
+
+
     return {
       cnt,
       menus,
       price,
       modal,
-      modalClose,
       rooms,
       click,
     };

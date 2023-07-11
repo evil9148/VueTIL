@@ -5,19 +5,24 @@
       <div>
         <h4>{{ rooms[click].title }}</h4>
         <p>상세정보 : {{ rooms[click].content }}</p>
-        <p>가격 : {{ rooms[click].price }}</p>
+        <input v-model.number="month" type="number">
+        <p>{{month}}개월 결제시 가격 : {{ rooms[click].price * month }}</p>
       </div>
-      <button @click="modalClose">close</button>
+      <button @click="$emit('closeModal')">close</button>
     </div>
   </div>
 </template>
 
 <script>
+import { ref } from 'vue';
 export default {
   name: "CompModal",
   props: ["rooms","click","modal","modalClose"],
   setup() {
-    return {};
+    let month = ref(0)
+    return {
+      month
+    };
   },
 };
 </script>
