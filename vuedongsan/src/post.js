@@ -38,5 +38,5 @@ export default[{
   title: "Banziha One Room",
   image: "https://codingapple1.github.io/vue/room5.jpg",
   content: "반지하 원룸입니다. 비올 때 물가끔 새는거 빼면 좋아요",
-  price: '370,000'
+  price: 370000
 }];

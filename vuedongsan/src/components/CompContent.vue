@@ -18,6 +18,7 @@ export default {
   methods:{
     fnShowModal(){
       this.$emit('showModal',this.roomContainer.id)
+      document.querySelector('.modal')
     }
   }
 };

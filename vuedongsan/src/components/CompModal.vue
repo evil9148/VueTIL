@@ -5,24 +5,52 @@
       <div>
         <h4>{{ rooms[click].title }}</h4>
         <p>상세정보 : {{ rooms[click].content }}</p>
-        <input v-model.number="month" type="number">
-        <p>{{month}}개월 결제시 가격 : {{ rooms[click].price * month }}</p>
+        <input v-model="month" />
+        <p>{{ month }}개월 결제시 가격 : {{ rooms[click].price * month }}</p>
       </div>
-      <button @click="$emit('closeModal')">close</button>
+      <div class="pay" @click="payHandler">결제하기</div>
+      <button @click="ModalClose($emit)">close</button>
     </div>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue';
+
 export default {
   name: "CompModal",
-  props: ["rooms","click","modal","modalClose"],
-  setup() {
-    let month = ref(0)
+  props: ["rooms", "click", "modal"],
+  data() {
     return {
-      month
+      month: 0,
     };
+  },
+  methods: {
+    ModalClose(emit) {
+      this.month = 0;
+      emit("closeModal");
+    },
+    payHandler() {
+      if (this.month < 3) {
+        alert("3개월 이상만 결제가 가능합니다.");
+        this.month = 3;
+      }
+    },
+  },
+  watch: {
+    month(a) {
+      if (isNaN(a)) {
+        alert(`숫자만 입력이 가능합니다.`);
+        this.month = 3;
+      }
+      if (a > 12) {
+        alert("1~12개월만 입력이 가능합니다.");
+      }
+    },
+  },
+  beforeUpdate(){
+    if(this.month == 1 || this.month == 2){
+      alert('3개월 이상부터 결제가 가능합니다.')
+    }
   },
 };
 </script>
@@ -62,5 +90,12 @@ export default {
   padding: 20px;
   box-shadow: 0px 4px 16px rgba(17, 17, 26, 0.05),
     0px 8px 32px rgba(17, 17, 26, 0.05);
+}
+
+.pay {
+  cursor: pointer;
+  text-align: center;
+  color: #fff;
+  background-color: darkslateblue;
 }
 </style>
