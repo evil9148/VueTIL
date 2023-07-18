@@ -1,0 +1,14 @@
+01 state (v-on v-bind 보간법)
+02 @경로 BASE_URL
+03 form요소 v-model
+04 v-if v-show 
+05 component props emit scopeStyle
+06 component provide inject
+07 v-for
+08 computed
+09 watchEffect watch
+10 lifeCycle
+11 router
+12 vuex
+13 axios json-server
+14 todoApp
